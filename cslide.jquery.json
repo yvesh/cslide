@@ -1,0 +1,28 @@
+{
+    "name": "cslide",
+    "title": "JQuery cSlide",
+    "description": "Built for highly customizable and feature-rich slideshows.",
+    "keywords": [
+        "slideshow",
+        "carousel",
+        "slider"
+    ],
+    "version": "1.0.0-2013.09.29",
+    "author": {
+        "name": "Yves Hoppe",
+        "url": "https://compojoom.com"
+    },
+    "licenses": [
+        {
+            "type": "GPL v2",
+            "url": "http://www.gnu.org/licenses/gpl-2.0.html"
+        }
+    ],
+    "bugs": "https://compojoom.com/cslide/issues",
+    "homepage": "https://compojoom.com",
+    "docs": "https://compojoom.com/cslide/",
+    "download": "",
+    "dependencies": {
+        "jquery": ">=1.7"
+    }
+}
