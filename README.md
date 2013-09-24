@@ -57,25 +57,25 @@ You can style the elements pretty easy with css (or use the default javascript c
 Settings
 -----------------------
 
-delay:                      8000, // Delay between every image
-autoplay:                      1, // Automatically start the slideshow
-loop:                          1, // Should the slideshow looped or stopped after all slides are shown
-pauseOnHover:                  1, // Should the slideshow stopped on mouse over?
-speed:                      1000, // Speed of the animation / effect
-startingSlide:                 1, // Set the number on which the slideshow should start (beginning on 0)
-slides:                    'img', // Set the slide elements, normally img, but you can also use links, divs etc
-fx:                       'fade', // Set the effect / animation for the slide, please notice that depending on effect you also need to load jquery-ui
-captionContainer:             '', // Container (normally a div) for the counter (e.g. 2 / 4) - Can be outside of the slideshow too, e.g. #myslide-counter (optional)
-textContainer:                '', // Text-Container (normally a div) - Can also be outside of the slideshow! (optional)
-                                  // (Optional, if you have a data-cslide-title on the slide we will display it in an automatically created div on the slide)
-titleContainer:               '', // Same like Text-Container
-nextButton:                   '', // Id of the next button (optional)
-prevButton:                   '', // Id of the prev button (optional)
-pauseButton:                  '', // Id of the pause button (optional)
-playButton:                   '', // Id of the play button (optional)
-linkTitle:                     1, // Link title (if link exists)
-autosize:                      1, // Auto resizing of the image (only images!)
-loadCSS:                       1  // Loads the default css or for the slideshow (you can also supply it yourself)
+    delay:                      8000, // Delay between every image
+    autoplay:                      1, // Automatically start the slideshow
+    loop:                          1, // Should the slideshow looped or stopped after all slides are shown
+    pauseOnHover:                  1, // Should the slideshow stopped on mouse over?
+    speed:                      1000, // Speed of the animation / effect
+    startingSlide:                 1, // Set the number on which the slideshow should start (beginning on 0)
+    slides:                    'img', // Set the slide elements, normally img, but you can also use links, divs etc
+    fx:                       'fade', // Set the effect / animation for the slide, please notice that depending on effect you also need to load jquery-ui
+    captionContainer:             '', // Container (normally a div) for the counter (e.g. 2 / 4) - Can be outside of the slideshow too, e.g. #myslide-counter (optional)
+    textContainer:                '', // Text-Container (normally a div) - Can also be outside of the slideshow! (optional)
+                                      // (Optional, if you have a data-cslide-title on the slide we will display it in an automatically created div on the slide)
+    titleContainer:               '', // Same like Text-Container
+    nextButton:                   '', // Id of the next button (optional)
+    prevButton:                   '', // Id of the prev button (optional)
+    pauseButton:                  '', // Id of the pause button (optional)
+    playButton:                   '', // Id of the play button (optional)
+    linkTitle:                     1, // Link title (if link exists)
+    autosize:                      1, // Auto resizing of the image (only images!)
+    loadCSS:                       1  // Loads the default css or for the slideshow (you can also supply it yourself)
 
 
 Documentation, Demo and more
