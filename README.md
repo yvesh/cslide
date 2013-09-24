@@ -1,4 +1,4 @@
-JQuery CSlide
+jQuery cSlide
 ======
 
 Simple and highly customizable jQuery Slideshow plugin currently in Alpha stage
