@@ -26,26 +26,19 @@ Next create a slideshow (normal HTML markup:)
 
 Now we have to initialize the slideshow:
 
-&lt;script&gt;
-
-jQuery( document ).ready(function() {
-
-    jQuery(&quot;myslideshow&quot;).cslide({
-
-        // your custom settings
-
+    <script>
+    jQuery( document ).ready(function() {
+        jQuery("myslideshow").cslide({
+            // your custom settings
+        });
     });
-
-});
-
-&lt;/script&gt;
+    </script>
 
 If you want to use titles or text you just extend the image with some cslide attributes (you can also use html there, but don't break the quotes).
 
 **For example**:
 
 &lt;img src=&quot;s1.jpg&quot; data-cslide-text=&quot;&lt;p&gt;My custom test&lt;/p&gt;&quot; data-cslide-title=&quot;My custom title&quot; data-cslide-link=&quot;http://compojoom.com&quot; /&gt;
-
 
 You can style the elements pretty easy with css (or use the default javascript css generator).
 
