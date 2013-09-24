@@ -1,16 +1,16 @@
 JQuery CSlide
 ======
 
-Simple and highly customizable JQuery slideshow currently in Alpha stage
+Simple and highly customizable jQuery Slideshow plugin currently in Alpha stage
 
 Getting started
 -----------------------
 
 Download the production version or development version. Include jQuery:
 
-`<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>`
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 
-Depending on which fx effect you want to use, you also need jQuery ui!
+Depending on which fx effect you want to use, you also need jQuery UI!
 
 Next create a slideshow (normal HTML markup:)
 
