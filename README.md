@@ -42,17 +42,17 @@ jQuery( document ).ready(function() {
 
 If you want to use titles or text you just extend the image with some cslide attributes (you can also use html there, but don't break the quotes).
 
-*For example*:
+**For example**:
 
 &lt;img src=&quot;s1.jpg&quot; data-cslide-text=&quot;&lt;p&gt;My custom test&lt;/p&gt;&quot; data-cslide-title=&quot;My custom title&quot; data-cslide-link=&quot;http://compojoom.com&quot; /&gt;
 
 
 You can style the elements pretty easy with css (or use the default javascript css generator).
 
-.cslide_inner (generated div Container around all elements, position is relative)
-.cslide_element (div Container which is created around every element, position is absolute)
-.cslide_text (div Container inside cslide_element which holds the text, only created if no textContainer is supplied and a title attribute exists)
-.cslide_title (div Container inside cslide_element which holds the title, only created if no titleContainer is supplied and a title attribute exists)
+    .cslide_inner (generated div Container around all elements, position is relative)
+    .cslide_element (div Container which is created around every element, position is absolute)
+    .cslide_text (div Container inside cslide_element which holds the text, only created if no textContainer is supplied and a title attribute exists)
+    .cslide_title (div Container inside cslide_element which holds the title, only created if no titleContainer is supplied and a title attribute exists)
 
 Settings
 -----------------------
