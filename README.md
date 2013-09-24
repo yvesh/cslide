@@ -15,25 +15,34 @@ Depending on which fx effect you want to use, you also need jQuery ui!
 Next create a slideshow (normal HTML markup:)
 
 &lt;div id=&quot;myslideshow&quot;&gt;
+
     &lt;img src=&quot;s1.jpg&quot; /&gt;
+
     &lt;img src=&quot;s2.jpg&quot; /&gt;
+
     &lt;img src=&quot;s3.jpg&quot; /&gt;
+
 &lt;/div&gt;
 
 Now we have to initialize the slideshow:
 
 &lt;script&gt;
+
 jQuery( document ).ready(function() {
+
     jQuery(&quot;myslideshow&quot;).cslide({
+
         // your custom settings
+
     });
+
 });
+
 &lt;/script&gt;
 
 If you want to use titles or text you just extend the image with some cslide attributes (you can also use html there, but don't break the quotes).
 
-For example:
-
+*For example*:
 
 &lt;img src=&quot;s1.jpg&quot; data-cslide-text=&quot;&lt;p&gt;My custom test&lt;/p&gt;&quot; data-cslide-title=&quot;My custom title&quot; data-cslide-link=&quot;http://compojoom.com&quot; /&gt;
 
