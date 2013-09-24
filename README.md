@@ -14,15 +14,11 @@ Depending on which fx effect you want to use, you also need jQuery ui!
 
 Next create a slideshow (normal HTML markup:)
 
-&lt;div id=&quot;myslideshow&quot;&gt;
-
-&lt;img src=&quot;s1.jpg&quot; /&gt;
-
-&lt;img src=&quot;s2.jpg&quot; /&gt;
-
-&lt;img src=&quot;s3.jpg&quot; /&gt;
-
-&lt;/div&gt;
+    <div id="myslideshow">
+        <img src="s1.jpg">
+        <img src="s1.jpg">
+        <img src="s1.jpg">
+    </div>
 
 Now we have to initialize the slideshow:
 
