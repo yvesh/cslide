@@ -15,23 +15,23 @@ Depending on which fx effect you want to use, you also need jQuery ui!
 Next create a slideshow (normal HTML markup:)
 
 <code>
-<div id="myslideshow">
-    <img src="s1.jpg" />
-    <img src="s2.jpg" />
-    <img src="s3.jpg" />
-</div>
+&lt;div id=&quot;myslideshow&quot;&gt;
+    &lt;img src=&quot;s1.jpg&quot; /&gt;
+    &lt;img src=&quot;s2.jpg&quot; /&gt;
+    &lt;img src=&quot;s3.jpg&quot; /&gt;
+&lt;/div&gt;
 <code>
 
 Now we have to initialize the slideshow:
 
 <code>
-<script>
+&lt;script&gt;
 jQuery( document ).ready(function() {
-    jQuery("myslideshow").cslide({
+    jQuery(&quot;myslideshow&quot;).cslide({
         // your custom settings
     });
 });
-</script>
+&lt;/script&gt;
 <code>
 
 If you want to use titles or text you just extend the image with some cslide attributes (you can also use html there, but don't break the quotes).
@@ -39,7 +39,7 @@ If you want to use titles or text you just extend the image with some cslide att
 For example:
 
 <code>
-<img src="s1.jpg" data-cslide-text="<p>My custom test</p>" data-cslide-title="My custom title" data-cslide-link="http://compojoom.com" />
+&lt;img src=&quot;s1.jpg&quot; data-cslide-text=&quot;&lt;p&gt;My custom test&lt;/p&gt;&quot; data-cslide-title=&quot;My custom title&quot; data-cslide-link=&quot;http://compojoom.com&quot; /&gt;
 </code>
 
 You can style the elements pretty easy with css (or use the default javascript css generator).
