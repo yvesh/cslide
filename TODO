@@ -1,0 +1,7 @@
+jQuery cSlide TODO
+======
+
+#Optimize performance
+#Better touch / mobile device support
++Add some sort of progress bar (optional)
++Add a moving and clickable image (thumbs) preview (optional)
