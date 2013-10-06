@@ -1,14 +1,14 @@
 /*
- * jQuery CSlide; v20130923
+ * jQuery CSlide; v20131006
  * http://compojoom.com
  * Copyright (c) 2013 Yves Hoppe; License: GPL v2 or later
  */
 
 (function( $ ) {
 
-    var version = "20130923";
+    var version = "20131006";
 
-    $.fn.cslide.CSS = function( name ) {
+    $.fn.cslide.CSS = function( name, options ) {
 
         // Text Element
         if (name === "title") {
@@ -43,6 +43,33 @@
 
             $(".cslide_text").css(styles);
             $(".cslides_text").children("p").css("opacity", "1");
+        }
+
+        if(name == "preview") {
+
+            var styles = {
+                position: "relative",
+                float: "right",
+                background: options.previewBackground,
+                width: options.previewSize,
+                overflow: "hidden"
+            };
+
+            var stylesInner = {
+
+            }
+
+            var stylesElement = {
+                width:  options.previewSize - 14,
+                height: options.previewThumbHeight,
+                overflow: "hidden",
+                border: "2px solid #000",
+                margin: "4px 5px"
+            }
+
+            $(".cslide_preview").css(styles);
+            $(".cslide_preview_inner").css(stylesInner);
+            $(".cslide_preview_element").css(stylesElement);
         }
 
         return this;

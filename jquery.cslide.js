@@ -1,12 +1,12 @@
 /*
- * jQuery CSlide; v20130923
- * http://compojoom.com
+ * jQuery CSlide; v20131006
+ * https://compojoom.com
  * Copyright (c) 2013 Yves Hoppe; License: GPL v2 or later
  */
 
 (function( $ ) {
 
-    var version = "20130924";
+    var version = "20131006";
     var debug = 1;
 
     $.fn.cslide = function( options ) {
@@ -18,7 +18,7 @@
             loop:                          1, // Should the slideshow looped or stopped after all slides are shown
             pauseOnHover:                  1, // Should the slideshow stopped on mouse over?
             speed:                      1000, // Speed of the animation / effect
-            startingSlide:                 1, // Set the number on which the slideshow should start (beginning on 0)
+            startingSlide:                 0, // Set the number on which the slideshow should start (beginning on 0) - not working with preview (you need to start at 0)
             slides:                    'img', // Set the slide elements, normally img, but you can also use links, divs etc
             fx:                       'fade', // Set the effect / animation for the slide, please notice that depending on effect you also need to load jquery-ui
             captionContainer:             '', // Container (normally a div) for the counter (e.g. 2 / 4) - Can be outside of the slideshow too, e.g. #myslide-counter (optional)
@@ -31,12 +31,26 @@
             playButton:                   '', // Id of the play button (optional)
             linkTitle:                     1, // Link title (if link exists)
             autosize:                      1, // Auto resizing of the image (only images!)
-            loadCSS:                       1  // Loads the default css or for the slideshow (you can also supply it yourself)
+            loadCSS:                       1, // Loads the default css or for the slideshow (you can also supply it yourself)
+            progBar:                       1, // Adds a nice progressbar which shows how long an image remains
+            progBarHeight:                 5, // The height of the progressbar in px
+            progBarTop:                    0, // Progressbar top-position in px (default position is on the top, but you easily adjust it to the bottom of the slides)
+            preview:                       1, // Preview of the slides?
+            previewPos:              'right', // Possible values: left, right
+            previewSize:                 200, // Depending on previewPos (width or height) in px
+            previewBackground:     '#333333', // Background color for the preview div
+            previewThumbHeight:           80  // Thumbnail height
+
         }, options );
 
         var holder = $.extend({
             // Holder for initialized objects
             container: null,
+            containerWidth: 0,
+            containerHeight: 0,
+            innerContainer: null,
+            previewCont: null,
+            pBar: null,
             slides: null,
             nextbutton: null,
             prevbutton: null,
@@ -115,6 +129,18 @@
                     });
                 }
 
+                if(settings.progBar == 1) {
+                    this.log('Adding Progressbar');
+                    holder.innerContainer.append('<div class="cslide_progressbar" style="position: absolute; top: 0px; left: 0; height: '
+                        + settings.progBarHeight+ 'px; z-index: 1999; background: darkred;"></div>');
+
+                    holder.pbar = $(holder.innerContainer).children(".cslide_progressbar").first();
+                }
+
+                if(settings.progBar == 1) {
+                    holder.pbar.progressbar({ value: 0.0001 });
+                }
+
                 this.setCaption();
             },
 
@@ -150,6 +176,15 @@
 
                 if(settings.titleContainer != "") {
                     this.setSlideTitle(nextslide.attr("data-cslide-title"));
+                }
+
+                if(settings.progBar == 1) {
+                    $(".cslide_progressbar .ui-progressbar-value").animate({width: holder.containerWidth}, settings.delay).animate({width: 0}, 10);
+                }
+
+                if(settings.preview) {
+                    var curpreview = $(".cslide_preview_element_" + (holder.current - 1));
+                    curpreview.appendTo(holder.previewCont);
                 }
             },
 
@@ -187,6 +222,10 @@
                 if(settings.titleContainer != "") {
                     this.setSlideTitle(prevslide.attr("data-cslide-title"));
                 }
+
+                if(settings.progBar == 1) {
+                    $(".cslide_progressbar .ui-progressbar-value").animate({width: holder.containerWidth}, settings.delay).animate({width: 0}, 10);
+                }
             },
 
             // Pauses (destroys the interval) the slideshow
@@ -197,6 +236,9 @@
 
             // Starts the slideshow
             play: function() {
+                if (settings.progBar){
+                    $(".cslide_progressbar .ui-progressbar-value").animate({width: holder.containerWidth}, settings.delay).animate({width: 0}, 10);
+                }
                 var ct = this;
                 holder.instNr = setInterval(
                     function(){ct.next()}, settings.delay
@@ -234,14 +276,29 @@
             log('Preparing Container');
 
             // Prepare the slideshow container
-            $( container ).wrapInner("<div class='cslide_inner'></div>");
+            var cont =  $( container );
+            cont.addClass("clearfix");
+            cont.wrapInner("<div class='cslide_inner clearfix' style='position: relative;'></div>");
 
-            var innerContainer = $( container ).children(".cslide_inner").first();
-            innerContainer.css({"position": "relative"}); // Set inner container position relative
+            holder.innerContainer = cont.children(".cslide_inner").first();
+
+            if(settings.preview) {
+                cont.append('<div class="cslide_preview" style="height: ' + cont.outerHeight(true) + 'px"><div class="cslide_preview_inner"></div></div>');
+                holder.previewCont = cont.find(".cslide_preview_inner").first();
+            }
+
+            holder.containerWidth = cont.outerWidth(true);
+            holder.containerHeight = cont.outerHeight(true);
+
+            if(settings.preview) {
+                holder.containerWidth -= settings.previewSize;
+            }
 
             var zIndex = 990;
+
             holder.slides = $( this ).find(settings.slides);
 
+            var i = 0;
             holder.slides.each(function(){
                  // Single slideshow item
                 var slide = $( this );
@@ -249,21 +306,18 @@
                 var stitle = this.getAttribute("data-cslide-title");
                 var stext = this.getAttribute("data-cslide-text");
 
-                var contWidth = $( container ).outerWidth(true);
-                var contHeight = $( container).outerHeight(true);
-
                 if(settings.autosize) {
                     // Set Element img dimensions (according to slideshow size)
                     if(settings.slides != 'img') {
                         // Find img
-                        slide.find('img').innerWidth(contWidth).innerHeight(contHeight);
+                        slide.find('img').innerWidth(holder.containerWidth).innerHeight(holder.containerHeight);
                     } else {
                         // Resize element itself
-                        slide.innerWidth(contWidth).innerHeight(contHeight);
+                        slide.innerWidth(holder.containerWidth).innerHeight(holder.containerHeight);
                     }
                 }
 
-                slide.wrap('<div class="cslide_element"></div>');
+                slide.wrap('<div class="cslide_element cslide_element_' + i +'"></div>');
 
                 // We wrap an div element around it (not manupilating the users object directly)
                 var cele = slide.parent(".cslide_element");
@@ -302,6 +356,17 @@
                     cele.on("mouseenter", function() { API.pause(); });
                     cele.on("mouseleave", function() { API.play(); });
                 }
+
+                if(settings.preview) {
+                    if(settings.slides == 'img') {
+                        holder.previewCont.append('<div class="cslide_preview_element cslide_preview_element_' + i + '">' + '<img src="' + slide.attr("src")
+                            + '" style="width: ' +  settings.previewSize + 'px; height: ' + settings.previewThumbHeight + 'px;" />' + '</div>');
+                    } else {
+                        holder.previewCont.append('<div class="cslide_preview_element">' + slide.find('img').first() + '</div>');
+                    }
+                }
+
+                i++;
             });
 
             holder.slides.eq( settings.startingSlide ).parent(".cslide_element").show();
@@ -309,13 +374,17 @@
             API.initshow(container);
 
             // Load css for the generated title / caption div
-            if (settings.loadCSS == 1) {
+            if (settings.loadCSS) {
                 if (holder.title == 1 && settings.titleContainer == "") {
-                    $.fn.cslide.CSS("title");
+                    $.fn.cslide.CSS("title", null);
                 }
 
                 if (holder.text == 1 && settings.textContainer == "") {
-                    $.fn.cslide.CSS("text");
+                    $.fn.cslide.CSS("text", null);
+                }
+
+                if (settings.preview) {
+                    $.fn.cslide.CSS("preview", settings);
                 }
             }
 
